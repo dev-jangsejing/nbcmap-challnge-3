@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">challnge3</string>
+
+    <string name="sign_up_name">이름</string>
+    <string name="sign_up_name_hint">이름을 입력하세요.</string>
+    <string name="sign_up_id">아이디</string>
+    <string name="sign_up_id_hint">아이디를 입력하세요.</string>
+    <string name="sign_up_password">비밀먼호</string>
+    <string name="sign_up_password_hint">비밀먼호를 입력하세요.</string>
+</resources>
