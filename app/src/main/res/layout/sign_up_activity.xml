@@ -59,4 +59,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/sign_up_password_hint" />
+
+    <Button
+        android:id="@+id/bt_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="회원가입" />
 </LinearLayout>
