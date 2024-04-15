@@ -1,11 +1,11 @@
-package com.jess.nbcamp.challnge3.practice
+package com.jess.nbcamp.challnge3.presentation.practice
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jess.nbcamp.challnge3.practice.SignUpValidExtension.includeAt
-import com.jess.nbcamp.challnge3.practice.SignUpValidExtension.includeSpecialCharacters
-import com.jess.nbcamp.challnge3.practice.SignUpValidExtension.includeUpperCase
+import com.jess.nbcamp.challnge3.presentation.practice.SignUpValidExtension.includeAt
+import com.jess.nbcamp.challnge3.presentation.practice.SignUpValidExtension.includeSpecialCharacters
+import com.jess.nbcamp.challnge3.presentation.practice.SignUpValidExtension.includeUpperCase
 
 class SignUpViewModel : ViewModel() {
 

@@ -1,4 +1,4 @@
-package com.jess.nbcamp.challnge3.practice
+package com.jess.nbcamp.challnge3.presentation.practice
 
 data class SignUpMember(
     val name: String,

@@ -1,4 +1,4 @@
-package com.jess.nbcamp.challnge3.sample
+package com.jess.nbcamp.challnge3.presentation.sample
 
 import android.os.Bundle
 import android.widget.Button
