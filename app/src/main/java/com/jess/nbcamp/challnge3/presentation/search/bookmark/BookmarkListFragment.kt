@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jess.nbcamp.challnge3.databinding.SearchListFragmentBinding
+import com.jess.nbcamp.challnge3.databinding.BookmarkListFragmentBinding
 
 class BookmarkListFragment : Fragment() {
 
@@ -13,7 +13,7 @@ class BookmarkListFragment : Fragment() {
         fun newInstance() = BookmarkListFragment()
     }
 
-    private var _binding: SearchListFragmentBinding? = null
+    private var _binding: BookmarkListFragmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class BookmarkListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = SearchListFragmentBinding.inflate(inflater, container, false)
+        _binding = BookmarkListFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

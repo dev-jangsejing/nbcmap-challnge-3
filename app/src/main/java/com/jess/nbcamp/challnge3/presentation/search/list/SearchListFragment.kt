@@ -56,7 +56,7 @@ class SearchListFragment : Fragment() {
     private fun initViewModel() = with(viewModel) {
         // collect : 새로운 데이터가 발행 되면 끝날 때 까지 기다림
         // collectLatest : 새로운 데이터가 발행되면 이전 처리르 취소하고 새로운 데이터 처리
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             uiState.flowWithLifecycle(lifecycle)
                 .collectLatest { state ->
                     onBind(state)
