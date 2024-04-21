@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/search_image_item" />
+        tools:listitem="@layout/search_list_image_item" />
 
     <ProgressBar
         android:id="@+id/progress"

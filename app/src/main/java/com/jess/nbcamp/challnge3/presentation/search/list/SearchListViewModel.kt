@@ -1,4 +1,4 @@
-package com.jess.nbcamp.challnge3.presentation.search
+package com.jess.nbcamp.challnge3.presentation.search.list
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -19,8 +19,8 @@ class SearchViewModel(
     private val searchImage: SearchGetImageUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(SearchUiState.init())
-    val uiState: StateFlow<SearchUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(SearchListUiState.init())
+    val uiState: StateFlow<SearchListUiState> = _uiState.asStateFlow()
 
     fun onSearch(
         query: String
@@ -54,19 +54,19 @@ class SearchViewModel(
 
     private fun createItems(
         images: SearchImageEntity,
-    ): List<SearchItem> {
+    ): List<SearchListItem> {
 
         fun createImageItems(
             images: SearchImageEntity,
-        ): List<SearchItem.ImageItem> = images.documents?.map { document ->
-            SearchItem.ImageItem(
+        ): List<SearchListItem.ImageItem> = images.documents?.map { document ->
+            SearchListItem.ImageItem(
                 title = document.displaySitename,
                 thumbnail = document.thumbnailUrl,
                 date = document.datetime
             )
         }.orEmpty()
 
-        return arrayListOf<SearchItem>().apply {
+        return arrayListOf<SearchListItem>().apply {
             addAll(createImageItems(images))
         }.sortedByDescending {
             it.date

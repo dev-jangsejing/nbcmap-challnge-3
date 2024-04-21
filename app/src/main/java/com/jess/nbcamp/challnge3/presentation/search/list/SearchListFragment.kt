@@ -1,20 +1,26 @@
-package com.jess.nbcamp.challnge3.presentation.search
+package com.jess.nbcamp.challnge3.presentation.search.list
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.jess.nbcamp.challnge3.databinding.SearchActivityBinding
+import com.jess.nbcamp.challnge3.databinding.SearchListFragmentBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class SearchActivity : AppCompatActivity() {
+class SearchListFragment : Fragment() {
 
-    private val binding: SearchActivityBinding by lazy {
-        SearchActivityBinding.inflate(layoutInflater)
+    companion object {
+        fun newInstance() = SearchListFragment()
     }
+
+    private var _binding: SearchListFragmentBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: SearchViewModel by viewModels {
         SearchViewModelFactory()
@@ -26,14 +32,20 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = SearchListFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initView()
         initViewModel()
 
-        // for test
         viewModel.onSearch("kotlin")
     }
 
@@ -53,10 +65,14 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun onBind(
-        state: SearchUiState
+        state: SearchListUiState
     ) = with(binding) {
         adapter.submitList(state.list)
         progress.isVisible = state.isLoading
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 }

@@ -1,4 +1,4 @@
-package com.jess.nbcamp.challnge3.presentation.search
+package com.jess.nbcamp.challnge3.presentation.search.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,26 +7,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.jess.nbcamp.challnge3.databinding.SearchImageItemBinding
+import com.jess.nbcamp.challnge3.databinding.SearchListImageItemBinding
 import com.jess.nbcamp.challnge3.databinding.UnknownItemBinding
 
 class SearchListAdapter(
-    private val onClick: (SearchItem) -> Unit
-) : ListAdapter<SearchItem, SearchListAdapter.ViewHolder>(
+    private val onClick: (SearchListItem) -> Unit
+) : ListAdapter<SearchListItem, SearchListAdapter.ViewHolder>(
 
-    object : DiffUtil.ItemCallback<SearchItem>() {
+    object : DiffUtil.ItemCallback<SearchListItem>() {
         override fun areItemsTheSame(
-            oldItem: SearchItem,
-            newItem: SearchItem
-        ): Boolean = if (oldItem is SearchItem.ImageItem && newItem is SearchItem.ImageItem) {
+            oldItem: SearchListItem,
+            newItem: SearchListItem
+        ): Boolean = if (oldItem is SearchListItem.ImageItem && newItem is SearchListItem.ImageItem) {
             oldItem.title == newItem.title
         } else {
             oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: SearchItem,
-            newItem: SearchItem
+            oldItem: SearchListItem,
+            newItem: SearchListItem
         ): Boolean = oldItem == newItem
     }
 ) {
@@ -39,18 +39,18 @@ class SearchListAdapter(
         root: View
     ) : RecyclerView.ViewHolder(root) {
 
-        abstract fun onBind(item: SearchItem)
+        abstract fun onBind(item: SearchListItem)
     }
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
-        is SearchItem.ImageItem -> SearchItemViewType.IMAGE.ordinal
+        is SearchListItem.ImageItem -> SearchItemViewType.IMAGE.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         when (viewType) {
             SearchItemViewType.IMAGE.ordinal ->
                 ImageViewHolder(
-                    SearchImageItemBinding.inflate(
+                    SearchListImageItemBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -72,12 +72,12 @@ class SearchListAdapter(
     }
 
     class ImageViewHolder(
-        private val binding: SearchImageItemBinding,
-        private val onClick: (SearchItem) -> Unit
+        private val binding: SearchListImageItemBinding,
+        private val onClick: (SearchListItem) -> Unit
     ) : ViewHolder(binding.root) {
 
-        override fun onBind(item: SearchItem) = with(binding) {
-            if (item is SearchItem.ImageItem) {
+        override fun onBind(item: SearchListItem) = with(binding) {
+            if (item is SearchListItem.ImageItem) {
                 title.text = item.title
                 thumbnail.load(item.thumbnail)
 
@@ -92,6 +92,6 @@ class SearchListAdapter(
         binding: UnknownItemBinding
     ) : ViewHolder(binding.root) {
 
-        override fun onBind(item: SearchItem) = Unit
+        override fun onBind(item: SearchListItem) = Unit
     }
 }

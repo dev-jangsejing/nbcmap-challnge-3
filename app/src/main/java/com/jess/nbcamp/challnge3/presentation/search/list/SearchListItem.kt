@@ -1,8 +1,8 @@
-package com.jess.nbcamp.challnge3.presentation.search
+package com.jess.nbcamp.challnge3.presentation.search.list
 
 import java.util.Date
 
-sealed class SearchItem(
+sealed class SearchListItem(
     open val date: Date?
 ) {
 
@@ -10,5 +10,5 @@ sealed class SearchItem(
         val title: String?,
         val thumbnail: String?,
         override val date: Date?
-    ) : SearchItem(date)
+    ) : SearchListItem(date)
 }
