@@ -1,4 +1,4 @@
-package com.jess.nbcamp.challnge3.presentation.search.model
+package com.jess.nbcamp.challnge3.domain.search.model
 
 import java.util.Date
 

@@ -1,4 +1,4 @@
-package com.jess.nbcamp.challnge3.presentation.search.model
+package com.jess.nbcamp.challnge3.domain.search.model
 
 import com.jess.nbcamp.challnge3.data.model.ImageDocumentResponse
 import com.jess.nbcamp.challnge3.data.model.MetaResponse
