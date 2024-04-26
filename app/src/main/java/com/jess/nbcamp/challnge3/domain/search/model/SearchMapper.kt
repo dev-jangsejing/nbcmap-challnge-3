@@ -3,6 +3,7 @@ package com.jess.nbcamp.challnge3.domain.search.model
 import com.jess.nbcamp.challnge3.data.model.ImageDocumentResponse
 import com.jess.nbcamp.challnge3.data.model.MetaResponse
 import com.jess.nbcamp.challnge3.data.model.SearchImageResponse
+import java.util.UUID
 
 fun SearchImageResponse.toEntity() = SearchImageEntity(
     meta = meta?.toEntity(),
@@ -18,6 +19,7 @@ fun MetaResponse.toEntity() = MetaEntity(
 )
 
 fun ImageDocumentResponse.toEntity() = ImageDocumentEntity(
+    id = UUID.randomUUID().toString(),
     collection = collection,
     thumbnailUrl = thumbnailUrl,
     imageUrl = imageUrl,

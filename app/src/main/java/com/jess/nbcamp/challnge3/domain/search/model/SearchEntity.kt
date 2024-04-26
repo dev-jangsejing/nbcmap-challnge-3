@@ -14,6 +14,7 @@ data class MetaEntity(
 )
 
 data class ImageDocumentEntity(
+    val id: String,
     val collection: String?,
     val thumbnailUrl: String?,
     val imageUrl: String?,

@@ -9,8 +9,11 @@ import com.jess.nbcamp.challnge3.data.repository.SearchRepositoryImpl
 import com.jess.nbcamp.challnge3.domain.search.model.SearchImageEntity
 import com.jess.nbcamp.challnge3.domain.search.usecase.SearchGetImageUseCase
 import com.jess.nbcamp.challnge3.network.RetrofitClient
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -21,6 +24,9 @@ class SearchViewModel(
 
     private val _uiState = MutableStateFlow(SearchListUiState.init())
     val uiState: StateFlow<SearchListUiState> = _uiState.asStateFlow()
+
+    private val _event = MutableSharedFlow<SearchListEvent>()
+    val event: SharedFlow<SearchListEvent> = _event.asSharedFlow()
 
     fun onSearch(
         query: String
@@ -60,7 +66,8 @@ class SearchViewModel(
             images: SearchImageEntity,
         ): List<SearchListItem.ImageItem> = images.documents?.map { document ->
             SearchListItem.ImageItem(
-                title = document.displaySitename,
+                id = document.id,
+                title = document.docUrl,
                 thumbnail = document.thumbnailUrl,
                 date = document.datetime
             )
@@ -68,9 +75,32 @@ class SearchViewModel(
 
         return arrayListOf<SearchListItem>().apply {
             addAll(createImageItems(images))
-        }.sortedByDescending {
-            it.date
         }
+    }
+
+    fun onBookmark(
+        item: SearchListItem,
+    ) = viewModelScope.launch {
+        val mutableList = uiState.value.list.toMutableList()
+
+        val position = mutableList.indexOfFirst {
+            it.id == item.id // 유니크값 대신 title 사용
+        }
+
+        _uiState.update { prev ->
+            prev.copy(
+                list = mutableList.also {
+                    it[position] = when (item) {
+                        is SearchListItem.ImageItem -> item.copy(
+                            bookmarked = item.bookmarked.not()
+                        )
+                    }
+                }
+            )
+        }
+
+        _event.emit(SearchListEvent.UpdateBookmark(uiState.value.list))
+
     }
 }
 

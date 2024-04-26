@@ -4,9 +4,15 @@ import java.util.Date
 
 sealed interface SearchListItem {
 
+    val id: String
+    val title:String?
+    val bookmarked: Boolean
+
     data class ImageItem(
-        val title: String?,
+        override val id: String,
+        override val title: String?,
         val thumbnail: String?,
-        val date: Date?
+        val date: Date?,
+        override val bookmarked: Boolean = false,
     ) : SearchListItem
 }

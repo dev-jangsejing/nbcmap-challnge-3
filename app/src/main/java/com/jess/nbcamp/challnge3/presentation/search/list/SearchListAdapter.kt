@@ -11,7 +11,8 @@ import com.jess.nbcamp.challnge3.databinding.SearchListImageItemBinding
 import com.jess.nbcamp.challnge3.databinding.UnknownItemBinding
 
 class SearchListAdapter(
-    private val onClick: (SearchListItem) -> Unit
+    private val onClick: (SearchListItem) -> Unit,
+    private val onBookmark: (SearchListItem) -> Unit,
 ) : ListAdapter<SearchListItem, SearchListAdapter.ViewHolder>(
 
     object : DiffUtil.ItemCallback<SearchListItem>() {
@@ -21,7 +22,7 @@ class SearchListAdapter(
             oldItem: SearchListItem,
             newItem: SearchListItem
         ): Boolean = if (oldItem is SearchListItem.ImageItem && newItem is SearchListItem.ImageItem) {
-            oldItem.title == newItem.title
+            oldItem.id == newItem.id
         } else {
             oldItem == newItem
         }
@@ -58,7 +59,8 @@ class SearchListAdapter(
                         parent,
                         false
                     ),
-                    onClick
+                    onClick,
+                    onBookmark,
                 )
 
             else -> UnknownViewHolder(
@@ -76,16 +78,24 @@ class SearchListAdapter(
 
     class ImageViewHolder(
         private val binding: SearchListImageItemBinding,
-        private val onClick: (SearchListItem) -> Unit
+        private val onClick: (SearchListItem) -> Unit,
+        private val onBookmark: (SearchListItem) -> Unit,
     ) : ViewHolder(binding.root) {
 
         override fun onBind(item: SearchListItem) = with(binding) {
             if (item is SearchListItem.ImageItem) {
                 title.text = item.title
                 thumbnail.load(item.thumbnail)
+                bookmark.isChecked = item.bookmarked
 
                 container.setOnClickListener {
                     onClick(item)
+                }
+
+                bookmark.setOnClickListener {
+                    if (item.bookmarked != bookmark.isChecked) {
+                        onBookmark(item)
+                    }
                 }
             }
         }
