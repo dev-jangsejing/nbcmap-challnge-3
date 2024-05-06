@@ -1,6 +1,8 @@
 package com.jess.nbcamp.challnge3.data.remote
 
-import com.jess.nbcamp.challnge3.data.model.SearchImageResponse
+import com.jess.nbcamp.challnge3.data.model.ImageDocumentResponse
+import com.jess.nbcamp.challnge3.data.model.SearchResponse
+import com.jess.nbcamp.challnge3.data.model.VideoDocumentResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,6 +14,11 @@ interface SearchRemoteDatasource {
         @Query("sort") sort: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
-    ): SearchImageResponse
+    ): SearchResponse<ImageDocumentResponse>
+
+    @GET("/v2/search/vclip")
+    suspend fun getSearchVideo(
+        @Query("query") query: String
+    ): SearchResponse<VideoDocumentResponse>
 
 }

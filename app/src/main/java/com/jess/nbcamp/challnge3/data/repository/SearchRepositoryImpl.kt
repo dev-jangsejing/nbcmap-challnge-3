@@ -1,7 +1,10 @@
 package com.jess.nbcamp.challnge3.data.repository
 
 import com.jess.nbcamp.challnge3.data.remote.SearchRemoteDatasource
-import com.jess.nbcamp.challnge3.domain.search.model.toEntity
+import com.jess.nbcamp.challnge3.domain.search.model.SearchEntity
+import com.jess.nbcamp.challnge3.domain.search.model.VideoDocumentEntity
+import com.jess.nbcamp.challnge3.domain.search.model.toImageEntity
+import com.jess.nbcamp.challnge3.domain.search.model.toVideoEntity
 import com.jess.nbcamp.challnge3.domain.search.repository.SearchRepository
 
 class SearchRepositoryImpl(
@@ -18,5 +21,14 @@ class SearchRepositoryImpl(
         sort,
         page,
         size
-    ).toEntity()
+    ).toImageEntity()
+
+    override suspend fun getSearchVideo(
+        query: String,
+        sort: String,
+        page: Int,
+        size: Int,
+    ): SearchEntity<VideoDocumentEntity> = remoteDatasource.getSearchVideo(
+        query,
+    ).toVideoEntity()
 }

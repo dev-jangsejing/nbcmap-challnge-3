@@ -1,10 +1,10 @@
 package com.jess.nbcamp.challnge3.domain.search.usecase
 
-import com.jess.nbcamp.challnge3.domain.search.model.ImageDocumentEntity
 import com.jess.nbcamp.challnge3.domain.search.model.SearchEntity
+import com.jess.nbcamp.challnge3.domain.search.model.VideoDocumentEntity
 import com.jess.nbcamp.challnge3.domain.search.repository.SearchRepository
 
-class SearchGetImageUseCase(
+class SearchGetVideoUseCase(
     private val repository: SearchRepository
 ) {
 
@@ -13,7 +13,7 @@ class SearchGetImageUseCase(
         sort: String = "accuracy",
         page: Int = 1,
         size: Int = 80
-    ): SearchEntity<ImageDocumentEntity> = repository.getSearchImage(
+    ): SearchEntity<VideoDocumentEntity> = repository.getSearchVideo(
         query,
         sort,
         page,

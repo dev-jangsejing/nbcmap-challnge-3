@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.jess.nbcamp.challnge3.databinding.SearchListImageItemBinding
+import com.jess.nbcamp.challnge3.databinding.SearchListVideoItemBinding
 import com.jess.nbcamp.challnge3.databinding.UnknownItemBinding
 
 class SearchListAdapter(
@@ -21,11 +22,8 @@ class SearchListAdapter(
         override fun areItemsTheSame(
             oldItem: SearchListItem,
             newItem: SearchListItem
-        ): Boolean = if (oldItem is SearchListItem.ImageItem && newItem is SearchListItem.ImageItem) {
-            oldItem.id == newItem.id
-        } else {
-            oldItem == newItem
-        }
+        ): Boolean = oldItem.id == newItem.id
+
 
         // 현재 리스트에 노출하고 있는 아이템과 새로운 아이템의 equals를 비교한다.
         override fun areContentsTheSame(
@@ -36,7 +34,7 @@ class SearchListAdapter(
 ) {
 
     enum class SearchItemViewType {
-        IMAGE
+        IMAGE, VIDEO
     }
 
     abstract class ViewHolder(
@@ -48,6 +46,7 @@ class SearchListAdapter(
 
     override fun getItemViewType(position: Int): Int = when (getItem(position)) {
         is SearchListItem.ImageItem -> SearchItemViewType.IMAGE.ordinal
+        is SearchListItem.VideoItem -> SearchItemViewType.VIDEO.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -55,6 +54,17 @@ class SearchListAdapter(
             SearchItemViewType.IMAGE.ordinal ->
                 ImageViewHolder(
                     SearchListImageItemBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    ),
+                    onClick,
+                    onBookmark,
+                )
+
+            SearchItemViewType.VIDEO.ordinal ->
+                VideoViewHolder(
+                    SearchListVideoItemBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -84,6 +94,31 @@ class SearchListAdapter(
 
         override fun onBind(item: SearchListItem) = with(binding) {
             if (item is SearchListItem.ImageItem) {
+                title.text = item.title
+                thumbnail.load(item.thumbnail)
+                bookmark.isChecked = item.bookmarked
+
+                container.setOnClickListener {
+                    onClick(item)
+                }
+
+                bookmark.setOnClickListener {
+                    if (item.bookmarked != bookmark.isChecked) {
+                        onBookmark(item)
+                    }
+                }
+            }
+        }
+    }
+
+    class VideoViewHolder(
+        private val binding: SearchListVideoItemBinding,
+        private val onClick: (SearchListItem) -> Unit,
+        private val onBookmark: (SearchListItem) -> Unit,
+    ) : ViewHolder(binding.root) {
+
+        override fun onBind(item: SearchListItem) = with(binding) {
+            if (item is SearchListItem.VideoItem) {
                 title.text = item.title
                 thumbnail.load(item.thumbnail)
                 bookmark.isChecked = item.bookmarked

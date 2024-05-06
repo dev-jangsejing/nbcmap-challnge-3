@@ -1,6 +1,8 @@
 package com.jess.nbcamp.challnge3.domain.search.repository
 
-import com.jess.nbcamp.challnge3.domain.search.model.SearchImageEntity
+import com.jess.nbcamp.challnge3.domain.search.model.ImageDocumentEntity
+import com.jess.nbcamp.challnge3.domain.search.model.SearchEntity
+import com.jess.nbcamp.challnge3.domain.search.model.VideoDocumentEntity
 
 interface SearchRepository {
 
@@ -8,6 +10,14 @@ interface SearchRepository {
         query: String,
         sort: String,
         page: Int,
-        size: Int,
-    ): SearchImageEntity
+        size: Int
+    ): SearchEntity<ImageDocumentEntity>
+
+
+    suspend fun getSearchVideo(
+        query: String,
+        sort: String,
+        page: Int,
+        size: Int
+    ): SearchEntity<VideoDocumentEntity>
 }

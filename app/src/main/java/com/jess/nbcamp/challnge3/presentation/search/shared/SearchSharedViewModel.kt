@@ -16,8 +16,8 @@ class SearchSharedViewModel : ViewModel() {
 
     fun updateBookmarkItems(list: List<SearchListItem>) = viewModelScope.launch {
         list.filter {
-                it.bookmarked
-            }
+            it.bookmarked
+        }
             .map {
                 BookmarkListItem(
                     id = it.id,

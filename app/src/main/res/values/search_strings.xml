@@ -5,4 +5,8 @@
     <string name="search_tab_search_title">Search</string>
     <string name="search_tab_bookmark_title">Bookmark</string>
 
+    <string name="search_type_video">video</string>
+    <string name="search_type_image">image</string>
+
+
 </resources>
