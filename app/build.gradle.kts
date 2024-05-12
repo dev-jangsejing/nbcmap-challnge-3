@@ -1,14 +1,16 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace = "com.jess.nbcamp.challnge3"
+    namespace = "com.jess.nbcamp.challenge3"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.jess.nbcamp.challnge3"
+        applicationId = "com.jess.nbcamp.challenge3"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -52,6 +54,9 @@ dependencies {
 
     // coil
     implementation("io.coil-kt:coil:2.4.0")
+
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-compiler:2.44")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
