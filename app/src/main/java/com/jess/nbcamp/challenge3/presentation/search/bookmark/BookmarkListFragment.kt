@@ -12,9 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import com.jess.nbcamp.challenge3.databinding.BookmarkListFragmentBinding
 import com.jess.nbcamp.challenge3.presentation.search.shared.SearchSharedEvent
 import com.jess.nbcamp.challenge3.presentation.search.shared.SearchSharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class BookmarkListFragment : Fragment() {
 
     companion object {

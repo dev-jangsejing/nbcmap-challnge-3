@@ -6,8 +6,9 @@ import com.jess.nbcamp.challenge3.domain.search.model.VideoDocumentEntity
 import com.jess.nbcamp.challenge3.domain.search.model.toImageEntity
 import com.jess.nbcamp.challenge3.domain.search.model.toVideoEntity
 import com.jess.nbcamp.challenge3.domain.search.repository.SearchRepository
+import javax.inject.Inject
 
-class SearchRepositoryImpl(
+class SearchRepositoryImpl @Inject constructor(
     private val remoteDatasource: SearchRemoteDatasource,
 ) : SearchRepository {
 

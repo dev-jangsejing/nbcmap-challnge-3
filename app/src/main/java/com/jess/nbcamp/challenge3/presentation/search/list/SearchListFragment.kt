@@ -12,9 +12,11 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.jess.nbcamp.challenge3.databinding.SearchListFragmentBinding
 import com.jess.nbcamp.challenge3.presentation.search.shared.SearchSharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SearchListFragment : Fragment() {
 
     companion object {
@@ -24,9 +26,7 @@ class SearchListFragment : Fragment() {
     private var _binding: SearchListFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SearchViewModel by viewModels {
-        SearchViewModelFactory()
-    }
+    private val viewModel: SearchViewModel by viewModels()
 
     private val sharedViewModel: SearchSharedViewModel by activityViewModels()
 

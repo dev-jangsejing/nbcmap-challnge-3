@@ -3,8 +3,9 @@ package com.jess.nbcamp.challenge3.domain.search.usecase
 import com.jess.nbcamp.challenge3.domain.search.model.SearchEntity
 import com.jess.nbcamp.challenge3.domain.search.model.VideoDocumentEntity
 import com.jess.nbcamp.challenge3.domain.search.repository.SearchRepository
+import javax.inject.Inject
 
-class SearchGetVideoUseCase(
+class SearchGetVideoUseCase @Inject constructor(
     private val repository: SearchRepository
 ) {
 

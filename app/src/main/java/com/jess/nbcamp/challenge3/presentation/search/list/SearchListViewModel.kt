@@ -2,17 +2,13 @@ package com.jess.nbcamp.challenge3.presentation.search.list
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.CreationExtras
-import com.jess.nbcamp.challenge3.data.repository.SearchRepositoryImpl
 import com.jess.nbcamp.challenge3.domain.search.model.ImageDocumentEntity
 import com.jess.nbcamp.challenge3.domain.search.model.SearchEntity
 import com.jess.nbcamp.challenge3.domain.search.model.VideoDocumentEntity
-import com.jess.nbcamp.challenge3.domain.search.repository.SearchRepository
 import com.jess.nbcamp.challenge3.domain.search.usecase.SearchGetImageUseCase
 import com.jess.nbcamp.challenge3.domain.search.usecase.SearchGetVideoUseCase
-import com.jess.nbcamp.challenge3.network.RetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -21,8 +17,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val searchImage: SearchGetImageUseCase,
     private val searchVideo: SearchGetVideoUseCase,
 ) : ViewModel() {
@@ -128,18 +126,4 @@ class SearchViewModel(
         _event.emit(SearchListEvent.UpdateBookmark(uiState.value.list))
 
     }
-}
-
-class SearchViewModelFactory : ViewModelProvider.Factory {
-
-    private val repository: SearchRepository = SearchRepositoryImpl(RetrofitClient.search)
-
-
-    override fun <T : ViewModel> create(
-        modelClass: Class<T>,
-        extras: CreationExtras
-    ): T = SearchViewModel(
-        SearchGetImageUseCase(repository),
-        SearchGetVideoUseCase(repository),
-    ) as T
 }

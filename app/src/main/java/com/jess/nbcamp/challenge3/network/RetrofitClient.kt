@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private const val BASE_URL = "https://dapi.kakao.com"
+    const val BASE_URL = "https://dapi.kakao.com"
 
     private val okHttpClient by lazy {
         OkHttpClient.Builder()

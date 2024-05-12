@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jess.nbcamp.challenge3.databinding.SearchMainActivityBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchMainActivity : AppCompatActivity() {
 
     private val binding: SearchMainActivityBinding by lazy {
